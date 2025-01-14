@@ -34,38 +34,38 @@ class TranscriptionApp:
             st.session_state.transcriber = None
 
     def display_output_section(self):
-    """Affiche la section des résultats de la transcription avec les options de téléchargement."""
-    if st.session_state.transcription_result:
-        st.header(self.get_text('transcription_result'))
-        
-        # Affichage du texte transcrit
-        st.text_area(
-            label="",
-            value=st.session_state.transcription_result,
-            height=300,
-            key="transcription_output"
-        )
-        
-        col1, col2 = st.columns(2)
-        
-        # Bouton pour copier le texte
-        with col1:
-            if st.button(self.get_text('copy_clipboard')):
-                st.write(self.get_text('text_copied'))
-        
-        # Bouton pour télécharger en format Word
-        with col2:
-            if st.button(self.get_text('download_word')):
-                doc_buffer = create_word_document(
-                    st.session_state.transcription_result,
-                    title=self.get_text('transcription_result')
-                )
-                st.download_button(
-                    label=self.get_text('download_word'),
-                    data=doc_buffer,
-                    file_name=f"transcription_{datetime.now().strftime('%Y%m%d_%H%M%S')}.docx",
-                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
+        """Affiche la section des résultats de la transcription avec les options de téléchargement."""
+        if st.session_state.transcription_result:
+            st.header(self.get_text('transcription_result'))
+            
+            # Affichage du texte transcrit
+            st.text_area(
+                label="",
+                value=st.session_state.transcription_result,
+                height=300,
+                key="transcription_output"
+            )
+            
+            col1, col2 = st.columns(2)
+            
+            # Bouton pour copier le texte
+            with col1:
+                if st.button(self.get_text('copy_clipboard')):
+                    st.write(self.get_text('text_copied'))
+            
+            # Bouton pour télécharger en format Word
+            with col2:
+                if st.button(self.get_text('download_word')):
+                    doc_buffer = create_word_document(
+                        st.session_state.transcription_result,
+                        title=self.get_text('transcription_result')
+                    )
+                    st.download_button(
+                        label=self.get_text('download_word'),
+                        data=doc_buffer,
+                        file_name=f"transcription_{datetime.now().strftime('%Y%m%d_%H%M%S')}.docx",
+                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    )
     def setup_sidebar(self):
         """Configure la barre latérale de l'application"""
         with st.sidebar:
