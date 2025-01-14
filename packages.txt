@@ -1,4 +1,5 @@
+python3.9-distutils
+python3.9-dev
+build-essential
 ffmpeg
 libsndfile1
-python3-dev
-build-essential
